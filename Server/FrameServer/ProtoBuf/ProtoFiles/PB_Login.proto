@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+message Login{
+	string username = 1;
+}
+
+message LoginResponse{
+	bool result = 1;
+	int32 uid = 2;
+	int32 udpPort = 3;
+	bool reconnect = 4;
+}

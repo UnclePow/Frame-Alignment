@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+message Match{
+	int32 uid = 1;
+	string clientIP = 2;
+	int32 clientUdpPort = 3;
+}
+
+message MatchResponse{
+
+}
+
+message MatchCancle{
+	int32 uid = 1;
+}
+
+message MatchCancleResponse{
+
+}

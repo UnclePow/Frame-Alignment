@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+
+//处于一场对局中的玩家说必备的属性
+message BattleUserInfo{
+	int32 uid = 1;
+	int32 battleID = 2;
+}
+
+//匹配成功后由服务器端发送给客户端
+message BattleEnter{
+	int32 seed = 1;
+	int32 battleID = 2;
+	repeated BattleUserInfo allPlayers = 3;
+}
+
+//当客户端进入战局后所有资源都加载完毕时发送给服务器端
+message BattleReady{
+	BattleUserInfo battleUserInfo = 1;
+}
+
+//当所有玩家加载完毕后服务器端发送给客户端
+message BattleStart{
+
+}
+
+message Operation{
+	int32 move = 1;
+	//后期扩展
+}
+
+message PlayerOperation{
+	int32 operationID = 1;
+	BattleUserInfo battleUserInfo = 2;
+	Operation operation = 3;
+}
+
+message AllPlayerOperation{
+	repeated PlayerOperation playerOperations = 1;
+}
+
+message UpPlayerOperation{
+	int32 mesID = 1;
+	PlayerOperation playerOperation = 2;
+}
+
+message DownPlayerOperations{
+	int32 frameID = 1;
+	repeated PlayerOperation playerOperations = 2;
+}
+
+message RequestLackFrames{
+	BattleUserInfo battleUserInfo = 1;
+	repeated int32 lackFrameIDs = 2;
+}
+
+message ResponseLackFrames{
+	repeated DownPlayerOperations lackFrames = 1;
+}
+
+message RequestGameOver{
+	BattleUserInfo battleUserInfo = 1;
+}
+
+message ResponseGameOver{
+
+}
+
+message Reconnect{
+	int32 uid = 1;
+	string clientIP = 2;
+	int32 clientUdpPort = 3;
+}
+
+message ReconnectResponse{
+	bool result = 1;
+	int32 seed = 2;
+	int32 battleID = 3;
+	repeated BattleUserInfo allPlayers = 4;
+}
